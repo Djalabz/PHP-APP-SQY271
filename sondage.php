@@ -28,8 +28,6 @@ if (isset($_POST["submit"])) {
         $error = "Veuillez remplir tous les champs";
     }
 } 
-
-
 // 4 - Enfin on les affiche dans le HTML en y mélangeant les balises php si pb lors des vérifications 
 // afficher un message d'erreur 
 
@@ -91,9 +89,7 @@ if (isset($_POST["submit"])) {
 
     <!-- Cas ou on a une erreur et le formulaire a été soumis  -->
     <?php elseif (isset($error) && isset($_POST["submit"])) : ?>
-
         <h3><?= $error ?></h3>
-
     <?php endif ?>
 
 </div>
