@@ -3,8 +3,7 @@
 include "partials/header.php";
 include "config/db.php";
 
-// 1 - Récupération des todos existantes en BDD
-
+// Application de todos avec la BDD 
 
 // On déclare $todos qui vient éxecuter la requete sur $db 
 // fetchAll() nous  retourne l'ensemble des résultats (!= fetch qui n'en retourne qu'un seul le premier)
@@ -19,7 +18,6 @@ if (isset($_POST["submit"])) {
 
         // On vient se prémunir des injections SQL avec des requetes préparées
         // Cad on remplace les données en provenance du user par ?
-        // Requete SQL avec les ?
         $sqlInsert = "INSERT INTO todos(content) VALUES(?)";
 
         // On vient préparer la requete 
@@ -27,7 +25,6 @@ if (isset($_POST["submit"])) {
 
         // On vient ensuite éxecuter la requete et lier les paramètres 3
         $stmt->execute([$content]);  
-        
 
     } else {
         $error = "Veuillez écrire une todo";
