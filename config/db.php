@@ -15,7 +15,7 @@ try {
     $db = new PDO($dsn, "root", "root", $options);    
 
     // On affiche un message de confirmation si succès
-    echo "La connexion à la BDD a réussie";
+    // echo "La connexion à la BDD a réussie";
 
 } catch(PDOException $error) {
     // En cas d'erreur on stop le script et on l'affiche
