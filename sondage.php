@@ -2,6 +2,16 @@
 
 include "partials/header.php";
 
+// Coder le php ici ...
+
+// 1 - Vérifier que le formulaire ait bien été soumis 
+// 2 - Vérifier que tous les champs/ inputs aient bien été pris en compte
+// 3 - Une fois tout cela vérifié on recupèe les différentes valeurs que l'on assigne à des variables 
+// 4 - Enfin on les affiche dans le HTML en y mélangeant les balises php Si pb lors des vérifications 
+// afficher un message d'erreur 
+
+// Vous aurez basoin de récupérer les infos soumises par l'utilisateur pour ca on peut utiliser $_POST
+
 ?>
 
 
@@ -9,7 +19,7 @@ include "partials/header.php";
 
 <!-- h2+input*2+(h3+(input*3))*2+(h3+input*2)*2+input -->
 
-<form action="" method="">
+<form action="" method="POST">
 
     <input placeholder="Votre prénom ..." type="text" name="prenom">
     <input placeholder="Votre nom ..." type="text" name="nom">
@@ -36,6 +46,9 @@ include "partials/header.php";
 
     <input name="ia" value="yes" type="radio">Oui
     <input name="ia" value="no" type="radio">Non
+
+    <br>
+    <br>
 
     <input value="Soumettre" type="submit">
 
