@@ -1,0 +1,23 @@
+* {
+    box-sizing: border-box;
+}
+
+.results {
+    width: 500px;
+    height: 500px;
+    border: solid 1px black; 
+    padding: 2rem;
+}
+
+form {
+    display: grid;
+    max-width: 800px;
+    margin: auto;
+}
+
+input[type="text"], input[type="password"], input[type="submit"] {
+    padding: 0.2rem 0.4rem;
+    width: 400px;
+    margin: 0.25rem auto;
+
+}
