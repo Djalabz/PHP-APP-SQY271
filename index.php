@@ -13,11 +13,14 @@ include "partials/check-session.php";
 
 // echo $_COOKIE["test"];
 
+
 ?>
 
 <h1>Bienvenue sur mon app en PHP</h1>
 
 <h2>Bonjour <?= $_SESSION["username"] ?> comment allez vous ?</h2>
+
+<img class="avatar" src="<?= $_SESSION["avatar"] ?>" alt="">
 
 <?php
 

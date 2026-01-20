@@ -40,16 +40,25 @@ if ($e = curl_error($ch)) {
 On récupère un tableau, lui meme constitué d'objets (ou tableaux associatifs en php) -->
 
 <!-- Si on a bien $product de défini ... -->
-<?php if (isset($products)) ?>
-    <!-- ... alors on vient boucler dans ce tableau pour afficher chaque produit -->
-    <?php foreach($products as $product) : ?>
-        
-        <h2><?= $product["title"] ?></h2>
-        <img src="<?= $product["image"] ?>">
-        <h4><?= $product["description"] ?></h4>
-        <h2><?= $product["price"] ?> €</h2>
+<?php if (isset($products)) :  ?>
 
-    <?php endforeach ?>
+    <div class="products-grid">
+
+        <!-- ... alors on vient boucler dans ce tableau pour afficher chaque produit -->
+        <?php foreach($products as $product) : ?>
+            <div class="product-card">
+                <h2><?= $product["title"] ?></h2>
+                <img src="<?= $product["image"] ?>">
+                <h4><?= $product["description"] ?></h4>
+                <h2><?= $product["price"] ?> €</h2>
+            </div>
+
+        <?php endforeach ?>
+
+    </div>
+
+<?php endif ?>
+
 <?php 
 
 include "partials/footer.php";

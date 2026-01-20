@@ -37,6 +37,7 @@ if (isset($_POST["submit"])) {
                 $_SESSION["username"] = $res["username"]; 
                 $_SESSION["email"] = $res["email"];
                 $_SESSION["timestamp"] = $res["timestamp"]; 
+                $_SESSION["avatar"] = $res["avatar"]; 
 
                 // Ici tout a été normalement vérifié -> on redirige vers la homepage
                 header("Location: index.php");

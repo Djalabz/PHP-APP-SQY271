@@ -22,7 +22,6 @@ input[type="text"], input[type="password"], input[type="submit"] {
 
 }
 
-
 header {
     width: 1280px;
     height: 80px;
@@ -30,3 +29,11 @@ header {
     align-items: center;
 }
 
+.products-grid {
+    width: 70vw;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 2rem;
+    row-gap: 3rem;
+}
