@@ -9,5 +9,10 @@
 </head>
 <body>
     
+1 - Faire un menu de navigation -> Home / About / Contact / Signout
 
+2 - !! Si jamais la personne ,n'est pas connectée (cad que la session n'est pas créee) 
+alors on affiche juste Signup / Login dans le menu
 
+3 - Rajouter en BDD dans users une colonne avatar qui contiendra le chemin vers un avatar par défaut
+Le user pourra le changer ultérieurement mais en attendant l'avatar par défaut doit s'afficher sur la homes

@@ -15,6 +15,7 @@ if (isset($_POST["submit"])) {
         // Requete afin de vérifier que le user existe bien (via email ou username)
         $sql = "SELECT * FROM users WHERE username = ? OR email = ?";
 
+        // On prépare puis on éxecute la requete SQL 
         $stmt = $db->prepare($sql);
         $stmt->execute([$_POST["username"], $_POST["username"]]);
 
@@ -26,6 +27,16 @@ if (isset($_POST["submit"])) {
         if ($res) {
             // Ici on vérifie avec password verify que le mdp correspond bien au hash en BDD
             if (password_verify($_POST["password"], $res["password"])) {
+
+                // Tout est bon, on démarre donc une session -> à partir de cette ligne
+                // le cookie de session qui contient l'id de la session est automatiquement créee 
+                session_start();
+
+                // On alimente avec les bonnes infos reçues de la BDD 
+                // notre superglobale $_SESSION - nom, email et date de création
+                $_SESSION["username"] = $res["username"]; 
+                $_SESSION["email"] = $res["email"];
+                $_SESSION["timestamp"] = $res["timestamp"]; 
 
                 // Ici tout a été normalement vérifié -> on redirige vers la homepage
                 header("Location: index.php");
