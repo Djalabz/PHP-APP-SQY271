@@ -1,10 +1,48 @@
 <?php
 
 include "partials/header.php";
+include "config/db.php";
+
+// Traitement des infos reçues en POST
+// Vérification que le form ait été soumis 
+// Puis vérification que les champs ne soient pas vides etc 
+
+// On vérifie que le form ait été soumis
+if (isset($_POST["submit"])) {
+    // On vérifie qu'aucun chalmp ne soit laissé vide
+    if (!empty($_POST["username"]) && !empty($_POST["password"])) {
+
+        // Requete afin de vérifier que le user existe bien (via email ou username)
+        $sql = "SELECT * FROM users WHERE username = ? OR email = ?";
+
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$_POST["username"], $_POST["username"]]);
+
+        // Avec fetch on vient recup la réponse > Si oui ou non un user existe bvien avec le pseudo donné ou le mail
+        $res = $stmt->fetch(); 
+
+        // Prise en compte du cas ou le user n'existe pas 
+        // $res seul dans les parenthèses équivaut à ($res === true)
+        if ($res) {
+            // Ici on vérifie avec password verify que le mdp correspond bien au hash en BDD
+            if (password_verify($_POST["password"], $res["password"])) {
+
+                // Ici tout a été normalement vérifié -> on redirige vers la homepage
+                header("Location: index.php");
+
+            } else {
+                $error = "Le mot de passe n'est pas bon ...";
+            }
+        } else {
+            $error = "Aucun utilisateur trouvé avec le pseudo / email donné";
+        }
+    } else {
+        $error = "Veuillez remplir tous les champs";
+    }
+}
+
 
 ?>
-
-<h1>Page de login</h1>
 
 <!-- 
 1 - Coder d'abord le form en question avec la method (post) et en ne précisant pas l'action dans les attributs. 
@@ -25,6 +63,23 @@ include "partials/header.php";
 
 4 - Si tout est bon est que le user est login -> trouver un moyen de rediriger vers la homepage (index.php)  
 -->
+
+<h1>Page de login</h1>
+
+<form action="" method="POST">
+
+    <input type="text" name="username" placeholder="Votre pseudo ...">
+    <input type="password" name="password" placeholder="Votre mot de passe ...">
+    <input type="submit" name="submit" value="Se connecter">
+
+</form>
+
+<?php if (isset($error)) : ?> 
+
+    <h3><?= $error ?></h3>
+
+<?php endif ?>
+
 
 <?php
 

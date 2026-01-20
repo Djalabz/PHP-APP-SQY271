@@ -4,7 +4,6 @@ include "partials/header.php";
 include "config/db.php";
 
 
-
 // Véerifier les données: Est ce que le form a été soumis ? 
 if (isset($_POST["submit"])) {
     // On vérifie que chaque champ du formulaire soit bien rempli
