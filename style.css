@@ -21,3 +21,12 @@ input[type="text"], input[type="password"], input[type="submit"] {
     margin: 0.25rem auto;
 
 }
+
+
+header {
+    width: 1280px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+

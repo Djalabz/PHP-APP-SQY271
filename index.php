@@ -1,7 +1,7 @@
 <?php
 
 include "partials/header.php";
-session_start();
+include "partials/check-session.php";
 
 // COOKIES 
 

@@ -20,6 +20,7 @@ session_start();
         <?php if (isset($_SESSION["username"])) : ?>
 
             <a href="index.php">Home</a>
+            <a href="shop.php">eShop</a>
             <a href="#">About</a>
             <a href="#">Contact</a>
             <a href="logout.php">Logout</a>

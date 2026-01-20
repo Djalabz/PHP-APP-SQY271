@@ -1,6 +1,7 @@
 <?php
 
 include "partials/header.php";
+include "partials/check-session.php";
 
 ?>
 
