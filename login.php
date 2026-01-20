@@ -29,6 +29,7 @@ if (isset($_POST["submit"])) {
 
                 // Ici tout a été normalement vérifié -> on redirige vers la homepage
                 header("Location: index.php");
+                exit();
 
             } else {
                 $error = "Le mot de passe n'est pas bon ...";

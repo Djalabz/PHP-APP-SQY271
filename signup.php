@@ -24,27 +24,42 @@ if (isset($_POST["submit"])) {
             // Il faudrait aussi théoriquement vérifier la longueur et le contenu du mdp .
             // (12 car mnimum, min, maj, chiffre et carcatère spécial)
 
-        if ($password !== $confirm) {
+        // On vient vérifier qu'un user en question n'est pas déjà enregistré avec ces informations
+        $sqlCheck = "SELECT * FROM users WHERE username = ? OR email = ?";
 
-            $error = "Le mot de passe et la confirmation sont différents...";
+        $stmtCheck = $db->prepare($sqlCheck);
+
+        $stmtCheck->execute([$_POST["username"], $_POST["email"]]);
+
+        $resCheck = $stmtCheck->fetch();
+
+        if (!$resCheck) {
+
+            if ($password !== $confirm) {
+
+                $error = "Le mot de passe et la confirmation sont différents...";
+                exit();
+    
+            } else {
+    
+                // Si les mdp sont bien identiques -> hasher le mdp
+                // On peut hasher grace à la fonction integrée password_hash
+                $hash = password_hash($password, PASSWORD_DEFAULT); 
+    
+                // On écrit notre requete SQL pour insérer un nouveau user dans la table users
+                $sql = "INSERT INTO users(username, email, password) VALUES(?, ?, ?)";
+    
+                // On vient préparer la requete 
+                $stmt = $db->prepare($sql);
+                
+                // On vbient éxecuter la requete en remplacant les ? par les bonnes variables.
+                $stmt->execute([$username, $email, $hash]);
+    
+            }
 
         } else {
-
-            // Si les mdp sont bien identiques -> hasher le mdp
-            // On peut hasher grace à la fonction integrée password_hash
-            $hash = password_hash($password, PASSWORD_DEFAULT); 
-
-            // On écrit notre requete SQL pour insérer un nouveau user dans la table users
-            $sql = "INSERT INTO users(username, email, password) VALUES(?, ?, ?)";
-
-            // On vient préparer la requete 
-            $stmt = $db->prepare($sql);
-            
-            // On vbient éxecuter la requete en remplacant les ? par les bonnes variables.
-            $stmt->execute([$username, $email, $hash]);
-
+            $error = "Il existe déjà un user avec cet email ou ce pseudo";
         }
-
     } else {
         $error = "Veuillez renseigner tous les champs";
     }
