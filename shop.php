@@ -26,7 +26,7 @@ if ($e = curl_error($ch)) {
 } else {
     // 5 - On décode la réponse depuis json afin de la rendre exploitable en PHP
     $products = json_decode($resp, true);
-    var_dump($products);
+    // var_dump($products);
 
     // 6 - Enfin on ferme la connexion
     curl_close($ch);
@@ -34,14 +34,22 @@ if ($e = curl_error($ch)) {
 
 ?>
 
-
 <h1>Mon eShop</h1>
 
+<!-- On va afficher la liste des produits recup depuis la fake store api 
+On récupère un tableau, lui meme constitué d'objets (ou tableaux associatifs en php) -->
 
-On va afficher la liste des produits recup depuis la fake store api 
+<!-- Si on a bien $product de défini ... -->
+<?php if (isset($products)) ?>
+    <!-- ... alors on vient boucler dans ce tableau pour afficher chaque produit -->
+    <?php foreach($products as $product) : ?>
+        
+        <h2><?= $product["title"] ?></h2>
+        <img src="<?= $product["image"] ?>">
+        <h4><?= $product["description"] ?></h4>
+        <h2><?= $product["price"] ?> €</h2>
 
-On récupère un tableau, lui meme constitué d'objets (ou tableaux associatifs en php)
-
+    <?php endforeach ?>
 <?php 
 
 include "partials/footer.php";
