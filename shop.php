@@ -21,27 +21,26 @@ $resp = curl_exec($ch);
 
 // Si il y a une erreur on l'affiche sinon on procède à la suite
 if ($e = curl_error($ch)) {
+    // On affiche l'erreur si il y en a une 
     var_dump($e);
 } else {
     // 5 - On décode la réponse depuis json afin de la rendre exploitable en PHP
     $products = json_decode($resp, true);
-
-    print_r($products);
+    var_dump($products);
 
     // 6 - Enfin on ferme la connexion
     curl_close($ch);
 }
-
-
-
-
-
 
 ?>
 
 
 <h1>Mon eShop</h1>
 
+
+On va afficher la liste des produits recup depuis la fake store api 
+
+On récupère un tableau, lui meme constitué d'objets (ou tableaux associatifs en php)
 
 <?php 
 
