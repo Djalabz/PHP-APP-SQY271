@@ -31,8 +31,6 @@ if (isset($_POST["submit"])) {
     }
 }
 
-
-
 ?>
 
 <h1>Ma todo en PHP</h1>
@@ -59,7 +57,6 @@ if (isset($_POST["submit"])) {
     <?php endif ?>
 
 </div>
-
 
 <?php
 

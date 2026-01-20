@@ -18,6 +18,6 @@ try {
     // echo "La connexion à la BDD a réussie";
 
 } catch(PDOException $error) {
-    // En cas d'erreur on stop le script et on l'affiche
+    // En cas d'erreur on stop le script et on l'affiche. On utilise la méthode getMessage() de PDOException
     die("erreur lors de la connexion : " . $error->getMessage());
 }

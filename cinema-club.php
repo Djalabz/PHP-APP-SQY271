@@ -2,6 +2,8 @@
 
 include "partials/header.php";
 
+
+
 // 1 - Récupérer, si il y en a, les données en GET
 // avec l'aide de superglobales - par exemple $_GET
 
