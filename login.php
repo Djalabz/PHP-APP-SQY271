@@ -119,7 +119,7 @@ if (isset($_POST["submit"])) {
 
     <p class="mt-10 text-center text-sm/6 text-gray-500">
       Pas encore inscrit ?
-      <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">S'inscrire</a>
+      <a href="signup.php" class="font-semibold text-indigo-600 hover:text-indigo-500">S'inscrire</a>
     </p>
 
     <?php if (isset($error)) : ?> 
