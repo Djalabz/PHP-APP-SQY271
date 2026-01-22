@@ -91,11 +91,12 @@ if (isset($_POST["submit"])) {
   </div>
 
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+
     <form action="#" method="POST" class="space-y-6">
       <div>
         <label for="email" class="block text-sm/6 font-medium text-gray-900">Pseudo / Email</label>
         <div class="mt-2">
-          <input id="email" type="text" name="email" required autocomplete="email" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+          <input id="email" type="text" name="username" required autocomplete="email" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
         </div>
       </div>
 
@@ -112,7 +113,7 @@ if (isset($_POST["submit"])) {
       </div>
 
       <div>
-        <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
+        <input value="Login" type="submit" name="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
       </div>
     </form>
 
@@ -120,6 +121,13 @@ if (isset($_POST["submit"])) {
       Pas encore inscrit ?
       <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">S'inscrire</a>
     </p>
+
+    <?php if (isset($error)) : ?> 
+
+        <h3 class="mt-10 text-center text-sm/6 text-red-500"><?= $error ?></h3>
+
+    <?php endif ?> 
+
   </div>
 </div>
 
@@ -132,11 +140,6 @@ if (isset($_POST["submit"])) {
 
 </form>
 
-<?php if (isset($error)) : ?> 
-
-    <h3><?= $error ?></h3>
-
-<?php endif ?> -->
 
 
 <?php
