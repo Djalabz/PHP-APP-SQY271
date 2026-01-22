@@ -10,8 +10,11 @@ if (isset($_GET["id"])) {
     // 1 - On intialise curl 
     $ch = curl_init();
 
+    // On récupère l'id du produit depuis les paramètres de l'URL avec $_GET
+    $id = $_GET["id"];
+
     // 2 - On définit l'url cible pour notre requete
-    $url = `https://fakestoreapi.com/products/${$_GET["id"]}`;
+    $url = "https://fakestoreapi.com/products/$id";
 
     // 3 - On établit les options pour cURL : l'url cible 
     // et le fait que la réponse contiennent les données attendues et pas juste un booléen
@@ -24,10 +27,10 @@ if (isset($_GET["id"])) {
     // Si il y a une erreur on l'affiche sinon on procède à la suite
     if ($e = curl_error($ch)) {
         // On affiche l'erreur si il y en a une 
-        var_dump($e);
+        // var_dump($e);
     } else {
         // 5 - On décode la réponse depuis json afin de la rendre exploitable en PHP
-        $products = json_decode($resp, true);
+        $product = json_decode($resp, true);
         // var_dump($products);
 
         // 6 - Enfin on ferme la connexion
@@ -38,33 +41,41 @@ if (isset($_GET["id"])) {
     exit();
 }
 
-
-
 ?>
+
+<?php if (isset($product)) : ?>
 
 <section>
   <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:items-center md:gap-8">
+
       <div>
         <div class="max-w-prose md:max-w-none">
           <h2 class="text-2xl font-semibold text-gray-900 sm:text-3xl">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                <?= $product["title"] ?>
           </h2>
 
           <p class="mt-4 text-pretty text-gray-700">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur doloremque saepe
-            architecto maiores repudiandae amet perferendis repellendus, reprehenderit voluptas
-            sequi.
+            <?= $product["description"] ?>
           </p>
+
+          <h2 class="text-2xl font-semibold text-gray-900 sm:text-3xl">
+                <?= $product["price"] . "€" ?>
+          </h2>
+
+          <button class="mt-4 flex w-48 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Ajouter au panier</button>
+
         </div>
       </div>
 
       <div>
-        <img src="https://images.unsplash.com/photo-1731690415686-e68f78e2b5bd?auto=format&amp;fit=crop&amp;q=80&amp;w=1160" class="rounded" alt="">
+        <img src="<?= $product["image"] ?>" class="rounded" alt="">
       </div>
     </div>
   </div>
 </section>
+
+<?php endif ?>
 
 
 <?php
