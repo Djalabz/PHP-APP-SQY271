@@ -18,14 +18,17 @@ session_start();
 <!-- Include this script tag or install `@tailwindplus/elements` via npm: -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script> -->
 <header class="bg-gray-900">
+    <!-- Notre menu de navigation Tailwind -->
   <nav aria-label="Global" class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
     
+    <!-- Logo de notre app à gauche -->
     <div class="flex lg:flex-1">
       <a href="index.php" class="-m-1.5 p-1.5">
         <img src="./assets/images/fouine-noBg.png" alt="" class="h-16 w-auto" />
       </a>
     </div>
 
+    <!-- Burger menu lorsque l'on est sur mobile ou tablette -->
     <div class="flex lg:hidden">
       <button type="button" command="show-modal" commandfor="mobile-menu" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-400">
         <span class="sr-only">Open main menu</span>
@@ -35,6 +38,7 @@ session_start();
       </button>
     </div>
 
+    <!-- Notre menu, qui change selon si l'on est login ou pas ... -->
     <?php if (isset($_SESSION["username"])) : ?>
 
         <el-popover-group class="hidden lg:flex lg:gap-x-12">
