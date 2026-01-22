@@ -17,7 +17,7 @@ session_start();
 
 <!-- Include this script tag or install `@tailwindplus/elements` via npm: -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script> -->
-<header class="bg-gray-900">
+<header class="bg-gray-900 z-1">
     <!-- Notre menu de navigation Tailwind -->
   <nav aria-label="Global" class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
     
@@ -49,6 +49,7 @@ session_start();
         </el-popover-group>
 
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+            <a href="cart.php"><img class="w-8 mr-4" src="./assets/icons/cart-icon.svg" /></a>
             <a href="logout.php" class="text-sm/6 font-semibold text-white">Log out <span aria-hidden="true">&rarr;</span></a>
         </div>
 
