@@ -77,9 +77,54 @@ if (isset($_POST["submit"])) {
 4 - Si tout est bon est que le user est login -> trouver un moyen de rediriger vers la homepage (index.php)  
 -->
 
-<h1 class="text-red-500">Page de login</h1>
+<!--
+  This example requires updating your template:
 
-<form action="" method="POST">
+  ```
+  <html class="h-full bg-white">
+  <body class="h-full">
+  ```
+-->
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Login</h2>
+  </div>
+
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <form action="#" method="POST" class="space-y-6">
+      <div>
+        <label for="email" class="block text-sm/6 font-medium text-gray-900">Pseudo / Email</label>
+        <div class="mt-2">
+          <input id="email" type="text" name="email" required autocomplete="email" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+        </div>
+      </div>
+
+      <div>
+        <div class="flex items-center justify-between">
+          <label for="password" class="block text-sm/6 font-medium text-gray-900">Mot de passe</label>
+          <div class="text-sm">
+            <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Mot de passe oublié ?</a>
+          </div>
+        </div>
+        <div class="mt-2">
+          <input id="password" type="password" name="password" required autocomplete="current-password" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+        </div>
+      </div>
+
+      <div>
+        <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
+      </div>
+    </form>
+
+    <p class="mt-10 text-center text-sm/6 text-gray-500">
+      Pas encore inscrit ?
+      <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">S'inscrire</a>
+    </p>
+  </div>
+</div>
+
+
+<!-- <form action="" method="POST">
 
     <input type="text" name="username" placeholder="Votre pseudo ...">
     <input type="password" name="password" placeholder="Votre mot de passe ...">
@@ -91,7 +136,7 @@ if (isset($_POST["submit"])) {
 
     <h3><?= $error ?></h3>
 
-<?php endif ?>
+<?php endif ?> -->
 
 
 <?php
