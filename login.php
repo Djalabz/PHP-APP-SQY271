@@ -34,10 +34,14 @@ if (isset($_POST["submit"])) {
 
                 // On alimente avec les bonnes infos reçues de la BDD 
                 // notre superglobale $_SESSION - nom, email et date de création
-                $_SESSION["username"] = $res["username"]; 
-                $_SESSION["email"] = $res["email"];
-                $_SESSION["timestamp"] = $res["timestamp"]; 
-                $_SESSION["avatar"] = $res["avatar"]; 
+                // $_SESSION["username"] = $res["username"]; 
+                // $_SESSION["email"] = $res["email"];
+                // $_SESSION["timestamp"] = $res["timestamp"]; 
+                // $_SESSION["avatar"] = $res["avatar"]; 
+                $_SESSION = $res;
+
+                // Suppression du password de nos données contenues dans la session
+                unset($_SESSION["password"]);
 
                 // Ici tout a été normalement vérifié -> on redirige vers la homepage
                 header("Location: index.php");
