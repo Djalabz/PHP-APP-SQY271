@@ -34,30 +34,49 @@ if ($e = curl_error($ch)) {
 
 ?>
 
-<h1>Mon eShop</h1>
-
 <!-- On va afficher la liste des produits recup depuis la fake store api 
 On récupère un tableau, lui meme constitué d'objets (ou tableaux associatifs en php) -->
 
-<!-- Si on a bien $product de défini ... -->
-<?php if (isset($products)) :  ?>
+<div class="bg-white">
+  <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+    <h2 class="text-2xl font-bold tracking-tight text-gray-900">Bienvenue sur le Shop</h2>
 
-    <div class="products-grid">
+    <!-- Si on a bien $product de défini ... -->
+    <?php if (isset($products)) :  ?>
 
-        <!-- ... alors on vient boucler dans ce tableau pour afficher chaque produit -->
+    <!-- A partir d'ici on affiche la liste des items du shop si on la reçoit bien -->
+    <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+
         <?php foreach($products as $product) : ?>
-            <div class="product-card">
-                <h2><?= $product["title"] ?></h2>
-                <img src="<?= $product["image"] ?>">
-                <h4><?= $product["description"] ?></h4>
-                <h2><?= $product["price"] ?> €</h2>
+
+        <!-- Code pour un item de la liste du shop -->
+        <div class="group relative">
+            <img src="<?= $product["image"] ?>" alt="Front of men&#039;s Basic Tee in black." class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80" />
+            <div class="mt-4 flex justify-between">
+                <div>
+                <h3 class="text-sm text-gray-700">
+                    <a href="#">
+                    <span aria-hidden="true" class="absolute inset-0"></span>
+                    <?= $product["title"] ?>
+                    </a>
+                </h3>
+                <p class="mt-1 text-sm text-gray-500"><?= substr($product["description"], 0, 100) ?> ...</p>
+                </div>
+                <p class="text-sm font-medium text-gray-900"><?= $product["price"] ?> €</p>
             </div>
+        </div>
 
         <?php endforeach ?>
 
     </div>
 
-<?php endif ?>
+    
+    <?php endif ?>
+
+  </div>
+</div>
+
+
 
 <?php 
 
