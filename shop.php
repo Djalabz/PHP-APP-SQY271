@@ -55,7 +55,7 @@ On récupère un tableau, lui meme constitué d'objets (ou tableaux associatifs 
             <div class="mt-4 flex justify-between">
                 <div>
                 <h3 class="text-sm text-gray-700">
-                    <a href="#">
+                    <a href="shop-item.php?id=<?= $product["id"] ?>">
                     <span aria-hidden="true" class="absolute inset-0"></span>
                     <?= $product["title"] ?>
                     </a>
