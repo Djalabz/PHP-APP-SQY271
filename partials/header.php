@@ -35,43 +35,27 @@ session_start();
       </button>
     </div>
 
-    <el-popover-group class="hidden lg:flex lg:gap-x-12">
-        <a href="#" class="text-sm/6 font-semibold text-white">Home</a>
-        <a href="#" class="text-sm/6 font-semibold text-white">Shop</a>
-        <a href="#" class="text-sm/6 font-semibold text-white">About</a>
-        <a href="#" class="text-sm/6 font-semibold text-white">Contact</a>
-    </el-popover-group>
+    <?php if (isset($_SESSION["username"])) : ?>
+
+        <el-popover-group class="hidden lg:flex lg:gap-x-12">
+            <a href="index.php" class="text-sm/6 font-semibold text-white">Home</a>
+            <a href="shop.php" class="text-sm/6 font-semibold text-white">Shop</a>
+            <a href="about.php" class="text-sm/6 font-semibold text-white">About</a>
+            <a href="contact.php" class="text-sm/6 font-semibold text-white">Contact</a>
+        </el-popover-group>
+
+    <?php else : ?>
+
+        <el-popover-group class="hidden lg:flex lg:gap-x-12">
+            <a href="login.php" class="text-sm/6 font-semibold text-white">Login</a>
+            <a href="signup.php" class="text-sm/6 font-semibold text-white">Signup</a>
+        </el-popover-group>
+
+    <?php endif ?>
 
     <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-      <a href="#" class="text-sm/6 font-semibold text-white">Log out <span aria-hidden="true">&rarr;</span></a>
+      <a href="logout.php" class="text-sm/6 font-semibold text-white">Log out <span aria-hidden="true">&rarr;</span></a>
     </div>
   </nav>
 </header>
 
-
-<!-- <header>
-    <nav>
-        <?php if (isset($_SESSION["username"])) : ?>
-
-            <a href="index.php">Home</a>
-            <a href="shop.php">eShop</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
-            <a href="logout.php">Logout</a>
-
-        <?php else : ?>
-
-            <a href="login.php">Login</a>
-            <a href="signup.php">Signup</a>
-
-        <?php endif ?>
-    </nav>
-</header> -->
-    
-<!-- 1 - Faire un menu de navigation -> Home / About / Contact / Signout
-
-2 - !! Si jamais la personne ,n'est pas connectée (cad que la session n'est pas créee) 
-alors on affiche juste Signup / Login dans le menu
-
-3 - Rajouter en BDD dans users une colonne avatar qui contiendra le chemin vers un avatar par défaut
-Le user pourra le changer ultérieurement mais en attendant l'avatar par défaut doit s'afficher sur la homes -->
