@@ -1,11 +1,11 @@
 <?php 
 
     // PAGE DE TYPE "TUNNEL" qui nous permet de déterminer le process d'ajout d'un element à notre panier
+    session_start();
 
     include "config/db.php";
     include "partials/check-session.php";
 
-    session_start();
 
 
     if (isset($_GET["id"])) {
