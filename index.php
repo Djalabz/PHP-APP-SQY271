@@ -16,11 +16,11 @@ include "partials/check-session.php";
 
 ?>
 
-<h1>Bienvenue sur mon app en PHP</h1>
+<h1 class="text-red-500">Bienvenue sur mon app en PHP</h1>
 
 <h2>Bonjour <?= $_SESSION["username"] ?> comment allez vous ?</h2>
 
-<img class="avatar" src="<?= $_SESSION["avatar"] ?>" alt="">
+<img class="avatar" src="<?= $_SESSION["avatar"] ?>" >
 
 <?php
 

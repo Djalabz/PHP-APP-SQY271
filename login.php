@@ -77,7 +77,7 @@ if (isset($_POST["submit"])) {
 4 - Si tout est bon est que le user est login -> trouver un moyen de rediriger vers la homepage (index.php)  
 -->
 
-<h1>Page de login</h1>
+<h1 class="text-red-500">Page de login</h1>
 
 <form action="" method="POST">
 
