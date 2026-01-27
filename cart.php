@@ -11,21 +11,18 @@ $stmt = $db->prepare($sql);
 $stmt->execute([$_SESSION["id"]]);
 $res = $stmt->fetch();
 
-$content = null;
+// Conversion des données JSON en tableau PHP
+if (isset($res["content"])) {
+    $content = json_decode($res["content"], true);
+} else {
+    $content = null;
+}
+
 $subtotal = 0;
 $total = 0;
 
-if ($res && !empty($res["content"])) {
-
-    // Conversion des données JSON en tableau PHP
-    $content = json_decode($res["content"], true);
-
-    if (empty($content)) {
-        $message = "Votre panier est vide pour le moment...";
-        // exit();
-    }
-    
-    // Vérification que le décodage JSON a réussi
+if (isset($res) && !empty($content)) {
+    //Vérification que le décodage JSON a réussi
     if ($content === null && json_last_error() !== JSON_ERROR_NONE) {
         $message = "Erreur lors du chargement du panier.";
         $content = null;
@@ -49,14 +46,14 @@ if ($res && !empty($res["content"])) {
 
     <h2 class="text-3xl font-bold text-gray-900 mb-8">Mon Panier</h2>
 
-    <?php if (isset($message) && $content === null || empty($content)) : ?>
+    <?php if (isset($message) && !isset($content) || empty($content)) : ?>
 
         <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm text-center">
             <p class="text-gray-600"><?= htmlspecialchars($message) ?></p>
             <a href="shop.php" class="mt-4 inline-block text-indigo-600 hover:text-indigo-500">Continuer vos achats</a>
         </div>
 
-    <?php elseif ($content && count($content) > 0) : ?>
+    <?php elseif (isset($content) && count($content) > 0) : ?>
         <div class="lg:grid lg:grid-cols-12 lg:gap-x-12">
 
             <!-- Cart Items -->

@@ -21,6 +21,10 @@
         $stmt->execute([$_SESSION["id"]]);  
         $res = $stmt->fetch();
 
+        // On associe à une variable $products ce que l'on récupère de l'API
+        $products = connectToAPI("https://fakestoreapi.com/products/");
+
+
         // SI on a bien un panier déjà enresgitré en BDD ...
         if ($res) {
             // On écrit la requete qui vient mettre à jour la colonne content 
@@ -31,8 +35,6 @@
             // afin de pouvoir exploiter ces données 
             $content = json_decode($res["content"], true);
 
-            // On associe à une variable $products ce que l'on récupère de l'API
-            $products = connectToAPI("https://fakestoreapi.com/products/");
 
 
             // On ajoute à notre tableau content les infos du produit récemment ajouté
@@ -41,6 +43,9 @@
             // On remet notre tableau $content au format json afin de le renvoyer en BDD 
             // et mettre à jour la bonne cellule
             $content = json_encode($content);
+
+            // var_dump($content);
+            // die();
 
             // On prepare, execute et on recup la réponse de la BDD 
             // Si tout est bon on redirige vers la page d'item et on précise 
@@ -60,10 +65,14 @@
             // On ajoute au tableau vide $content les infos du produit désiré 
             $content = json_encode([$products[$productId - 1]]);
 
+
             // On prépare + execute la requete avant de rediriger vers notre page de produit
             $stmtCreate = $db->prepare($sqlCreate);
             $stmtCreate->execute([$content, $_SESSION["id"]]);  
-            $resCreate = $stmtCreate->fetch();
+
+            // var_dump($content);
+            // die();
+            // $resCreate = $stmtCreate->fetch();
 
             header("Location: cart.php?id=$productId&status=success");
         }
