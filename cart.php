@@ -4,6 +4,18 @@ include "partials/header.php";
 include "partials/check-session.php";
 include "config/db.php";
 
+// Faire fonctionner le bouton de suppression pour chaque article : 
+
+// Pouer chaque bouton de suppression de chaque article on veut que ce soit un lien a
+// Ce lien a doit nous amener vers une URL qui va permettre la suppression en BDD de l'article 
+// dans notre cadi -> Réfléchir à un moyen de faire cela (pourquoi pas avec $_GET ?)
+// L'item supprimé ne doit plus etre présent en BDD ainsi que dans le HTML
+
+// Bonus : On voudra affiche une alert en JS qui nous demande de confirmer si on veut bien supprimer 
+// un article -> RAPPEL vous pouvez initégrer du JS avec du PHP entre des balises <script>
+
+
+
 // Récupération du contenu du panier depuis la base de données
 $sql = "SELECT * FROM cart WHERE id_user = ?";
 $stmt = $db->prepare($sql);
@@ -15,8 +27,14 @@ $subtotal = 0;
 $total = 0;
 
 if ($res && !empty($res["content"])) {
+
     // Conversion des données JSON en tableau PHP
     $content = json_decode($res["content"], true);
+
+    if (empty($content)) {
+        $message = "Votre panier est vide pour le moment...";
+        // exit();
+    }
     
     // Vérification que le décodage JSON a réussi
     if ($content === null && json_last_error() !== JSON_ERROR_NONE) {
@@ -39,7 +57,7 @@ if ($res && !empty($res["content"])) {
 
     <h2 class="text-3xl font-bold text-gray-900 mb-8">Mon Panier</h2>
 
-    <?php if (isset($message) && $content === null) : ?>
+    <?php if (isset($message) && $content === null || empty($content)) : ?>
 
         <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm text-center">
             <p class="text-gray-600"><?= htmlspecialchars($message) ?></p>
@@ -51,7 +69,7 @@ if ($res && !empty($res["content"])) {
 
             <!-- Cart Items -->
             <div class="lg:col-span-7 space-y-4">
-                
+
                 <?php foreach($content as $product) : ?>
                     <!-- Cart Item -->
                     <div class="flex rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
