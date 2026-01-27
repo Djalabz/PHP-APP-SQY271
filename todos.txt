@@ -1,0 +1,10 @@
+TODOS en PHP : 
+
+- Rajouter des filtres dans le shop et aussi les tables adequats (ex : catégories)
+- Ajouter les fonctionnalités liées au mail (page de contact et mdp oublié)
+- Ajouter les variables d'environnement dans .env 
+- Installer composer et les dépendances liées au mail 
+- Mettre en place un fichier de router 
+- Comment valider les données après signup et login -> regex 
+- Faire de la todo une vraie todo bien comme il faut
+- La POO en PHP -> réorganisation du code  

@@ -3,22 +3,7 @@
 include "partials/header.php";
 include "partials/check-session.php";
 
-// COOKIES 
-
-// Ajouter un cookie 
-// setcookie("test", "ceci est un cookie", time() + 3600);
-
-// Supprimer un cookie : on met une date d'expiration négative
-// setcookie("test", "ceci est un cookie", time() - 5);
-
-// echo $_COOKIE["test"];
-
-// echo "<pre>";
-// echo var_dump($_SESSION["cart"]);
-// echo "</pre>";
-
 ?>
-
 
 
 <div class="relative isolate px-6 pt-14 lg:px-8 -z-1">
@@ -35,8 +20,6 @@ include "partials/check-session.php";
     </div>
     
 </div>
-
-
 
 
 <?php

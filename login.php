@@ -44,10 +44,6 @@ if (isset($_POST["submit"])) {
 
                 // On alimente avec les bonnes infos reçues de la BDD 
                 // notre superglobale $_SESSION - nom, email et date de création
-                // $_SESSION["username"] = $res["username"]; 
-                // $_SESSION["email"] = $res["email"];
-                // $_SESSION["timestamp"] = $res["timestamp"]; 
-                // $_SESSION["avatar"] = $res["avatar"]; 
                 $_SESSION = $res;
 
                 // On ajoute le contenu du panier dans la session
