@@ -36,17 +36,22 @@ if ($res && !empty($res["content"])) {
 ?>
 
 <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+
     <h2 class="text-3xl font-bold text-gray-900 mb-8">Mon Panier</h2>
 
     <?php if (isset($message) && $content === null) : ?>
+
         <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm text-center">
             <p class="text-gray-600"><?= htmlspecialchars($message) ?></p>
             <a href="shop.php" class="mt-4 inline-block text-indigo-600 hover:text-indigo-500">Continuer vos achats</a>
         </div>
+
     <?php elseif ($content && count($content) > 0) : ?>
         <div class="lg:grid lg:grid-cols-12 lg:gap-x-12">
+
             <!-- Cart Items -->
             <div class="lg:col-span-7 space-y-4">
+                
                 <?php foreach($content as $product) : ?>
                     <!-- Cart Item -->
                     <div class="flex rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
