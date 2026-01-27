@@ -31,6 +31,13 @@ On récupère un tableau, lui meme constitué d'objets (ou tableaux associatifs 
   <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
     <h2 class="text-2xl font-bold tracking-tight text-gray-900">Bienvenue sur le Shop</h2>
 
+    <!-- Affichage du message de succès si on a ajouté un produitr dans le panier  -->
+    <?php if (isset($_GET["status"])) :  ?> 
+
+        <h3 class="text-green-700 font-bold mt-6">Votre article a bien été ajouté au panier !</h3>
+
+    <?php endif ?>
+
     <!-- Si on a bien $product de défini ... -->
     <?php if (isset($products)) :  ?>
 

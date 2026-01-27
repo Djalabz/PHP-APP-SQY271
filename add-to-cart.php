@@ -55,7 +55,7 @@
             $stmtUpdate->execute([$content, $_SESSION["id"]]);  
             $res = $stmtUpdate->fetch();
 
-            header("Location: cart.php?id=$productId&status=success");
+            header("Location: shop.php?id=$productId&status=success");
 
         } else {
             // Cas ou il faut aussi créer le panier dans la BDD 
@@ -74,7 +74,7 @@
             // die();
             // $resCreate = $stmtCreate->fetch();
 
-            header("Location: cart.php?id=$productId&status=success");
+            header("Location: shop.php?id=$productId&status=success");
         }
     } else {
         header("Location: shop.php");
