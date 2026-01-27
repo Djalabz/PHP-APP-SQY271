@@ -4,17 +4,6 @@ include "partials/header.php";
 include "partials/check-session.php";
 include "config/db.php";
 
-// Faire fonctionner le bouton de suppression pour chaque article : 
-
-// Pouer chaque bouton de suppression de chaque article on veut que ce soit un lien a
-// Ce lien a doit nous amener vers une URL qui va permettre la suppression en BDD de l'article 
-// dans notre cadi -> Réfléchir à un moyen de faire cela (pourquoi pas avec $_GET ?)
-// L'item supprimé ne doit plus etre présent en BDD ainsi que dans le HTML
-
-// Bonus : On voudra affiche une alert en JS qui nous demande de confirmer si on veut bien supprimer 
-// un article -> RAPPEL vous pouvez initégrer du JS avec du PHP entre des balises <script>
-
-
 
 // Récupération du contenu du panier depuis la base de données
 $sql = "SELECT * FROM cart WHERE id_user = ?";
@@ -53,6 +42,8 @@ if ($res && !empty($res["content"])) {
 
 ?>
 
+
+
 <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
 
     <h2 class="text-3xl font-bold text-gray-900 mb-8">Mon Panier</h2>
@@ -80,11 +71,14 @@ if ($res && !empty($res["content"])) {
                                     <h3 class="text-lg font-semibold text-gray-900"><?= htmlspecialchars($product["title"]) ?></h3>
                                     <p class="text-sm text-gray-500 mt-1"><?= number_format($product["price"], 2, ',', ' ') ?> €</p>
                                 </div>
-                                <a href="remove-from-cart.php?id=<?= $product["id"] ?>" class="text-gray-400 hover:text-red-500 transition-colors">
+
+                                <!-- Suppression du panier -->
+                                <a data-productId="<?= $product["id"] ?>" class="deleteBtn text-gray-400 hover:text-red-500 transition-colors">
                                     <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                                     </svg>
                                 </a>
+
                             </div>
                             <input type="number" value="1" min="1" class="mt-4 w-20 rounded-md border border-gray-300 px-3 py-1 text-sm">
                         </div>
@@ -120,6 +114,35 @@ if ($res && !empty($res["content"])) {
         </div>
     <?php endif ?>
 </main>
+
+<!-- Script JS pour afficher une alerte lors de la suppression d'un article -->
+<script>
+    console.log("script ok")
+    // Récupérer les éléments à écouter / rendre dynamique -> le lien "a" de suppression
+    // qui a pour classe "deleteBtn" -> On a tous les boutons à sélectionner d'ou le "all"
+    const deleteBtns = document.querySelectorAll(".deleteBtn")
+
+    console.log(deleteBtns)
+
+    // On veut écouter le click sur chaque bouton de suppression
+    deleteBtns.forEach((btn) => {
+
+        console.log(btn)
+
+        btn.addEventListener("click", () => {
+
+            console.log("bouton de sup cliqué")
+
+
+            if (confirm("Etes vous sur de vouloir supprimer l'article séléctionné ?") == true) {
+                window.location.href = "remove-from-cart.php?id=" + btn.getAttribute("data-productId")
+            } else {
+                window.reload()
+            }
+        }) 
+    })
+
+</script>
 
 <?php
 

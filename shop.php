@@ -3,6 +3,18 @@
 include "partials/header.php";
 include "partials/check-session.php";
 
+
+// Todo sur cette page : 
+
+
+// 1 -  Ajouter pour chaque article un bouton Ajouter au panier 
+// 2 - Sur la page article limiter la description
+// 3 - Sur la page de panier prendre en compte les quantités
+// cad que si on a ajouté 2 fois le meme item au panier 
+// -> Il ne s'affiche qu'une fois seule la quantité change  
+
+
+
 // On va utiliser cURL afin de récupérer des données depuis l'API fake store API : https://fakestoreapi.com/docs
 
 // 1 - On intialise curl 
