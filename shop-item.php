@@ -2,41 +2,16 @@
 
 include "partials/header.php";
 include "partials/check-session.php";
+include "config/cURL.php";
 
 
 // On va utiliser cURL afin de récupérer des données depuis l'API fake store API : https://fakestoreapi.com/docs
 
 if (isset($_GET["id"])) {
 
-    // 1 - On intialise curl 
-    $ch = curl_init();
-
-    // On récupère l'id du produit depuis les paramètres de l'URL avec $_GET
     $id = $_GET["id"];
+    $product = connectToAPI("https://fakestoreapi.com/products/$id");
 
-    // 2 - On définit l'url cible pour notre requete
-    $url = "https://fakestoreapi.com/products/$id";
-
-    // 3 - On établit les options pour cURL : l'url cible 
-    // et le fait que la réponse contiennent les données attendues et pas juste un booléen
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-    //. 4 - On vient ensuite éxecuter la requete 
-    $resp = curl_exec($ch);
-
-    // Si il y a une erreur on l'affiche sinon on procède à la suite
-    if ($e = curl_error($ch)) {
-        // On affiche l'erreur si il y en a une 
-        // var_dump($e);
-    } else {
-        // 5 - On décode la réponse depuis json afin de la rendre exploitable en PHP
-        $product = json_decode($resp, true);
-        $_SESSION["current-product"] = $product;
-
-        // 6 - Enfin on ferme la connexion
-        curl_close($ch);
-    }
 } else {
     header("Location: shop.php");
     exit();

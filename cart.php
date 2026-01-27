@@ -29,6 +29,7 @@ if ($res && !empty($res["content"])) {
     if ($content === null && json_last_error() !== JSON_ERROR_NONE) {
         $message = "Erreur lors du chargement du panier.";
         $content = null;
+        
     } else {
         // Calcul du sous-total
         foreach ($content as $product) {

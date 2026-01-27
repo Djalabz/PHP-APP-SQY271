@@ -1,16 +1,18 @@
 <?php 
 
-    // PAGE DE TYPE "TUNNEL" qui nous permet de déterminer le process d'ajout d'un element à notre panier
+    // PAGE DE TYPE "TUNNEL" qui nous permet de déterminer le process d'ajout d'un element à notre panie
+    
     session_start();
 
     include "config/db.php";
     include "partials/check-session.php";
-
+    include "config/cURL.php";
 
 
     if (isset($_GET["id"])) {
-        // On récupère l'id du produit à ajouter dans le panier
-        $productId = $_SESSION["current-product"]["id"];
+
+        // On récupère l'id du produit à ajouter dans le panier via l'URL
+        $productId = $_GET["id"];
 
         // Vérifier si notre user possède déjà un panier en BDD dans la table cart...
         $sql = "SELECT * FROM cart WHERE id_user = ?";
@@ -27,10 +29,14 @@
 
             // On recup le contenu du panier depuis la BDD ($content) et on le convertir depuis JSON 
             // afin de pouvoir exploiter ces données 
-            $content = json_decode($res["content"]);
+            $content = json_decode($res["content"], true);
+
+            // On associe à une variable $products ce que l'on récupère de l'API
+            $products = connectToAPI("https://fakestoreapi.com/products/");
+
 
             // On ajoute à notre tableau content les infos du produit récemment ajouté
-            $content[] = $_SESSION["current-product"];
+            $content[] = $products[$productId - 1];
 
             // On remet notre tableau $content au format json afin de le renvoyer en BDD 
             // et mettre à jour la bonne cellule
@@ -44,7 +50,7 @@
             $stmtUpdate->execute([$content, $_SESSION["id"]]);  
             $res = $stmtUpdate->fetch();
 
-            header("Location: shop-item.php?id=$productId&status=success");
+            header("Location: cart.php?id=$productId&status=success");
 
         } else {
             // Cas ou il faut aussi créer le panier dans la BDD 
@@ -52,14 +58,14 @@
             $sqlCreate = "INSERT INTO cart(content, id_user) VALUES(?, ?)";
 
             // On ajoute au tableau vide $content les infos du produit désiré 
-            $content = json_encode([$_SESSION["current-product"]]);
+            $content = json_encode([$products[$productId - 1]]);
 
             // On prépare + execute la requete avant de rediriger vers notre page de produit
             $stmtCreate = $db->prepare($sqlCreate);
             $stmtCreate->execute([$content, $_SESSION["id"]]);  
             $resCreate = $stmtCreate->fetch();
 
-            header("Location: shop-item.php?id=$productId&status=success");
+            header("Location: cart.php?id=$productId&status=success");
         }
     } else {
         header("Location: shop.php");
