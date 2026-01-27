@@ -62,7 +62,7 @@ On récupère un tableau, lui meme constitué d'objets (ou tableaux associatifs 
                     <p class="text-sm font-medium text-gray-900"><?= $product["price"] ?> €</p>
                 </div>
             </a>
-            <a href="add-to-cart.php?id=<?= $product["id"] ?>" class="mt-4 flex w-48 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Ajouter au panier</a>
+            <a href="add-to-cart.php?id=<?= $product["id"] ?>" class="addBtn animate__animated  mt-4 flex w-48 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Ajouter au panier</a>
         </div>
 
         <?php endforeach ?>
@@ -75,6 +75,19 @@ On récupère un tableau, lui meme constitué d'objets (ou tableaux associatifs 
   </div>
 </div>
 
+<!-- // Animation du bouton pour ajouter au panier -->
+<script>
+
+            const addBtns = document.querySelectorAll(".addBtn")
+
+            addBtns.forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    btn.classList.add("animate__bounceOut")
+                })
+
+            })
+
+</script>
 
 
 <?php 

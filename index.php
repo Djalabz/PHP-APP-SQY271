@@ -13,8 +13,13 @@ include "partials/check-session.php";
 
 // echo $_COOKIE["test"];
 
+// echo "<pre>";
+// echo var_dump($_SESSION["cart"]);
+// echo "</pre>";
 
 ?>
+
+
 
 <div class="relative isolate px-6 pt-14 lg:px-8 -z-1">
 
@@ -24,12 +29,14 @@ include "partials/check-session.php";
 
     <div class="mx-auto max-w-2xl py-24 sm:py-24 lg:py-24">
       <div class="text-center">
-        <h1 class="text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl">Bienvenue sur le Shop <?= $_SESSION["username"] ?> ! </h1>
+        <h1 class="animate animate__animated animate__zoomIn text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl">Bienvenue sur le Shop <?= $_SESSION["username"] ?> ! </h1>
         <p class="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8">Parce que PHP c'est pas le plus hype mais ça marche quand meme bien ...</p>
       </div>
     </div>
     
 </div>
+
+
 
 
 <?php

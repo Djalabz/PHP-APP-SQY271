@@ -28,6 +28,16 @@ if (isset($_POST["submit"])) {
             // Ici on vérifie avec password verify que le mdp correspond bien au hash en BDD
             if (password_verify($_POST["password"], $res["password"])) {
 
+                // Récupérer le panier correspondant au user afin d'afficher le nbre d'items 
+                // au niveau du logo du panier dans le header
+                $sqlCart = "SELECT * FROM cart WHERE id_user = ?";
+
+                // On prépare puis on éxecute la requete SQL pour récupérer le contenu du panier
+                $stmt = $db->prepare($sqlCart);
+                $stmt->execute([$res["id"]]);
+                $cart = $stmt->fetch(); 
+
+
                 // Tout est bon, on démarre donc une session -> à partir de cette ligne
                 // le cookie de session qui contient l'id de la session est automatiquement créee 
                 session_start();
@@ -39,6 +49,9 @@ if (isset($_POST["submit"])) {
                 // $_SESSION["timestamp"] = $res["timestamp"]; 
                 // $_SESSION["avatar"] = $res["avatar"]; 
                 $_SESSION = $res;
+
+                // On ajoute le contenu du panier dans la session
+                $_SESSION["cart"] = json_decode($cart["content"], true);
 
                 // Suppression du password de nos données contenues dans la session
                 unset($_SESSION["password"]);

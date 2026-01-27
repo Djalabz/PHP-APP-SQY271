@@ -50,10 +50,24 @@ session_start();
             <a href="shop.php" class="text-sm/6 font-semibold text-white">Shop</a>
             <a href="about.php" class="text-sm/6 font-semibold text-white">About</a>
             <a href="contact.php" class="text-sm/6 font-semibold text-white">Contact</a>
+            
         </el-popover-group>
 
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a href="cart.php"><img class="w-8 mr-4" src="./assets/icons/cart-icon.svg" /></a>
+
+            <!-- Icone du panier : rajouter le nbre d'items au dessus du logo -->
+             <!-- On va utiliser la longueur du tableau contenant les produits du panier  -->
+
+          <a href="cart.php"><img class="relative w-12 mr-12" src="./assets/icons/cart-icon.svg" />
+          
+                        
+              <?php if (isset($_SESSION["cart"])) :  ?>
+                <h2 class="absolute top-7 right-62 text-white bg-red-500 rounded-full w-6 h-6 flex justify-center items-center"><?= count($_SESSION["cart"]) ?></h2>
+              <?php endif ?>
+    
+          </a>
+
+
             <a href="logout.php" class="text-sm/6 font-semibold text-white">Log out <span aria-hidden="true">&rarr;</span></a>
         </div>
 

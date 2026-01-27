@@ -18,9 +18,11 @@ if (isset($res["content"])) {
     $content = null;
 }
 
+// On intialise les variables pour le calcul du cout total
 $subtotal = 0;
 $total = 0;
 
+// Calcul du total et gestion des erreurs 
 if (isset($res) && !empty($content)) {
     //Vérification que le décodage JSON a réussi
     if ($content === null && json_last_error() !== JSON_ERROR_NONE) {
