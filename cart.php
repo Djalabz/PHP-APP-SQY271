@@ -80,6 +80,7 @@ if (isset($res) && !empty($content)) {
                                 </a>
 
                             </div>
+                            <label>Quantité : </label>
                             <input type="number" value="1" min="1" class="mt-4 w-20 rounded-md border border-gray-300 px-3 py-1 text-sm">
                         </div>
                     </div>

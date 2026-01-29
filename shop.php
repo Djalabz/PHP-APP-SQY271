@@ -4,9 +4,7 @@ include "partials/header.php";
 include "partials/check-session.php";
 include "config/cURL.php";
 
-
 // Todo sur cette page : 
-
 
 // 1 - Ajouter pour chaque article un bouton Ajouter au panier 
 // 2 - Sur la page article limiter la description
@@ -19,24 +17,68 @@ include "config/cURL.php";
 // On pourra faire comme avec $db et importer la réponse du cURL dans les 
 // fichiers adequats 
 
-$products = connectToAPI("https://fakestoreapi.com/products");
+// On recup tous les produits en utilisant notre fonction de connexion vers l'API
+$products = connectToAPI("https://fakestoreapi.com/products"); 
+
+//// MENU DES FILTRES POUR LE SHOP
+
+// On initialise un tableau de catégories vide 
+$categories = [];
+
+// On récupère depuis le call API des produits ($produtcs) les différentes catés existantes 
+// Si une caté est déjà enregistrée dans le tableau alos on ne l'ajoute pas 
+foreach($products as $product) {
+    if (!in_array($product["category"], $categories)) {
+        $categories[] = $product["category"];
+    }
+}
+
+
+// Si on a bien une catégorie précisée en paramètre de l'URL ...
+if (isset($_GET["category"])) {
+
+    // ... alors on initialise un tableau vide qui recevra les produits 
+    // correspondants à la catégorie choisie 
+    $products_filtered = [];
+
+    // Popur chaque produit dans mon ensemble de produits, je vérifie
+    // que la catégorie corresponde bien : si c'est le cas je l'ajoute à mon tableau des produits filtrés 
+    foreach($products as $product) {
+        if ($product["category"] == $_GET["category"]) {
+            $products_filtered[] = $product;
+    }}
+
+    // Si la catégorie n'existe pas ou ne concerne aucun produit on arffiche un message d'erreur
+    if (!empty($products_filtered)) {
+        $products = $products_filtered;
+    } else {
+        $error = "La catégorie ne contient aucun produit ...";
+    }
+}
 
 
 ?>
 
 <!-- On va afficher la liste des produits recup depuis la fake store api 
 On récupère un tableau, lui meme constitué d'objets (ou tableaux associatifs en php) -->
-
 <div class="bg-white">
   <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-    <h2 class="text-2xl font-bold tracking-tight text-gray-900">Bienvenue sur le Shop</h2>
+    <h2 class="mb-6 text-2xl font-bold tracking-tight text-gray-900">Bienvenue sur le Shop</h2>
 
     <!-- Affichage du message de succès si on a ajouté un produitr dans le panier  -->
     <?php if (isset($_GET["status"])) :  ?> 
 
-        <h3 class="text-green-700 font-bold mt-6">Votre article a bien été ajouté au panier !</h3>
+        <h3 class="mb-6 text-green-700 font-bold mt-6">Votre article a bien été ajouté au panier !</h3>
 
     <?php endif ?>
+
+
+    <!-- Récupération des catégories afin de mettre en place un système de filtres  -->
+    <?php foreach($categories as $category) : ?> 
+        <a href="shop.php?category=<?= $category ?>" class="cursor-pointer inline mr-4 flex w-48 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+            <?= $category ?>
+        </a>
+    <?php endforeach ?>
 
     <!-- Si on a bien $product de défini ... -->
     <?php if (isset($products)) :  ?>
@@ -77,16 +119,13 @@ On récupère un tableau, lui meme constitué d'objets (ou tableaux associatifs 
 
 <!-- // Animation du bouton pour ajouter au panier -->
 <script>
+    const addBtns = document.querySelectorAll(".addBtn")
 
-            const addBtns = document.querySelectorAll(".addBtn")
-
-            addBtns.forEach((btn) => {
-                btn.addEventListener("click", () => {
-                    btn.classList.add("animate__bounceOut")
-                })
-
-            })
-
+    addBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            btn.classList.add("animate__bounceOut")
+        })
+    })
 </script>
 
 
