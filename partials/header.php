@@ -58,6 +58,8 @@ session_start();
             <!-- Icone du panier : rajouter le nbre d'items au dessus du logo -->
              <!-- On va utiliser la longueur du tableau contenant les produits du panier  -->
 
+          
+
           <a href="cart.php"><img class="relative w-12 mr-12" src="./assets/icons/cart-icon.svg" />
           
                         
@@ -82,5 +84,6 @@ session_start();
 
 
   </nav>
+  
 </header>
 

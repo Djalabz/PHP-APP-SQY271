@@ -35,10 +35,12 @@
             // afin de pouvoir exploiter ces données 
             $content = json_decode($res["content"], true);
 
-
-
             // On ajoute à notre tableau content les infos du produit récemment ajouté
             $content[] = $products[$productId - 1];
+
+            // Juste avant de transmettre le content mis à jour de notre cart en BDD 
+            // On l'enregistre en parallèle en Session
+            $_SESSION["cart"] = $content;
 
             // On remet notre tableau $content au format json afin de le renvoyer en BDD 
             // et mettre à jour la bonne cellule
@@ -61,6 +63,10 @@
             // Cas ou il faut aussi créer le panier dans la BDD 
             // Requete pour créer un panier dans la table cart
             $sqlCreate = "INSERT INTO cart(content, id_user) VALUES(?, ?)";
+
+            // Juste avant de transmettre le content mis à jour de notre cart en BDD 
+            // On l'enregistre en parallèle en Session
+            $_SESSION["cart"] = $content;
 
             // On ajoute au tableau vide $content les infos du produit désiré 
             $content = json_encode([$products[$productId - 1]]);

@@ -26,7 +26,7 @@ if (isset($_GET["id"])) {
         // On recup le content que l'on traduit depuis json 
         $content = json_decode($res["content"], true);
 
-        // On peut parcourir le Tableau reçu pui schercher k'id du produit en question 
+        // On peut parcourir le Tableau reçu pui schercher l'id du produit en question 
         // et le supprimer du contenu avec unset()
         foreach($content as $key=>$item) {
 
@@ -40,6 +40,11 @@ if (isset($_GET["id"])) {
         // On va transmettre notre tableau modifié à la BDD 
         // Requete SQL pour modifier le panier (son content en particulier)
         $sqlUpdate = "UPDATE cart SET content = ? WHERE id_user = ?";
+
+
+        // Juste avant de transmettre le content mis à jour de notre cart en BDD 
+        // On l'enregistre en parallèle en Session
+        $_SESSION["cart"] = $content;
 
         // On reconcvertit vers JSON avant d'envoyer 
         $content = json_encode($content);
