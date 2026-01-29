@@ -1,6 +1,10 @@
 <?php
 
+
 // Fichier de connexion de la BDD 
+
+include "dotenv.php";
+
 
 try {
 
@@ -12,7 +16,7 @@ try {
     $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC);
 
     // On vient finalement se connecter à la BDD 
-    $db = new PDO($dsn, "root", "root", $options);    
+    $db = new PDO($dsn, $dbuser, $dbpassword, $options);    
 
     // On affiche un message de confirmation si succès
     // echo "La connexion à la BDD a réussie";
