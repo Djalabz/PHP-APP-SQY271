@@ -126,6 +126,8 @@ On récupère un tableau, lui meme constitué d'objets (ou tableaux associatifs 
             btn.classList.add("animate__bounceOut")
         })
     })
+    
+
 </script>
 
 
