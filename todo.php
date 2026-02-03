@@ -16,6 +16,8 @@ include "config/db.php";
 // 3 - Coder la logique derrière chaque action en réutilisant $db et en écrivant 
 // les requetes SQL vers la DB  
 
+// Ajouter un lien qui permet de checker une todo 
+
 
 // On déclare $todos qui vient éxecuter la requete sur $db 
 // fetchAll() nous  retourne l'ensemble des résultats (!= fetch qui n'en retourne qu'un seul le premier)
@@ -72,6 +74,26 @@ if (!empty($_GET)) {
         header("Location: todo.php");
         exit();
     }
+
+    if (isset($_GET["check"])) {
+
+        foreach($todos as $todo) {
+
+            if ($todo["id"] == $_GET["check"]) {
+
+                $bool = $todo["check"];
+
+
+                $sql = "UPDATE todos SET checked = ? WHERE id = ?";
+
+                $stmt = $db->prepare($sql);
+                $stmt->execute([!$bool, $_GET["check"]]);
+                header("Location: todo.php");
+                exit();
+            }
+        }
+
+    }
 }
 
 ?>
@@ -90,10 +112,9 @@ if (!empty($_GET)) {
     <?php if (isset($todos)) : ?> 
         <!-- On utilise un foreach pour parcourir le tableau des todos  -->
         <?php foreach($todos as $todo) : ?>
-            
             <div class="todo">
 
-            <?php if (!empty($_GET) && ($_GET["id"] == $todo["id"]) && $_GET["edit"]) : ?> 
+            <?php if (!empty($_GET) && isset($_GET["id"]) && ($_GET["id"] == $todo["id"]) && $_GET["edit"]) : ?> 
 
                 <form action="todo.php?id=<?= $todo["id"] ?>&edit=done" method="POST">
 
@@ -108,10 +129,11 @@ if (!empty($_GET)) {
 
             <?php endif ?>
             
+                <a href="todo.php?check=<?= $todo["id"] ?>">Check</a>
                 <a href="todo.php?id=<?= $todo["id"] ?>&edit=true">Edit</a>
                 <a href="todo.php?id=<?= $todo["id"] ?>&delete=true">X</a>
-            </div>
 
+            </div>
         <?php endforeach ?>
     <?php endif ?>
 

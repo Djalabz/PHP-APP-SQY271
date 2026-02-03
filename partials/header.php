@@ -48,7 +48,7 @@ session_start();
         <el-popover-group class="hidden lg:flex lg:gap-x-12">
             <a href="index.php" class="text-sm/6 font-semibold text-white">Home</a>
             <a href="shop.php" class="text-sm/6 font-semibold text-white">Shop</a>
-            <a href="about.php" class="text-sm/6 font-semibold text-white">About</a>
+            <a href="projects.php" class="text-sm/6 font-semibold text-white">Projects</a>
             <a href="contact.php" class="text-sm/6 font-semibold text-white">Contact</a>
             
         </el-popover-group>
