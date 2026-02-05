@@ -10,7 +10,7 @@ include "config/cURL.php";
 // - Créer une table en BDD qui va contenir les notes, une entrée dans la table = une note d'un user 
 // - Dans cette table note il faudra que chaque note enregistrée puisse etre reliée à un article et à un utilisateur 
 // - Quand un user met une note celle-ci est enregistrée en BDD et on actualise l'affichage de la note du produit : 
-// -> Cette notre doit etre une moyenne de toutes les note attribuées au produit
+// -> Cette note doit etre une moyenne de toutes les note attribuées au produit
 
 // PS1 : Une seule note possible par article pour chaque user 
 // PS2 : Les notes doivent apparaitre dans la page shop et la page produit
