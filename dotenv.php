@@ -23,3 +23,6 @@ $dbpassword = $_ENV['DB_PASSWORD'];
 $mailuser = $_ENV['MAIL_USERNAME'];
 $mailpassword = $_ENV['MAIL_PASSWORD'];
 // $mailencrypt = $_ENV['SMTP_ENCRYPTION'];
+
+// Variables pour la weather API
+$apiKey = $_ENV["WEATHER_API_KEY"];

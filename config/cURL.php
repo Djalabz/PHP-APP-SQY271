@@ -2,7 +2,6 @@
 
 
 // On va utiliser cURL afin de récupérer des données depuis l'API fake store API : https://fakestoreapi.com/docs
-
 function connectToAPI($url) {
     // 1 - On intialise curl 
     $ch = curl_init();

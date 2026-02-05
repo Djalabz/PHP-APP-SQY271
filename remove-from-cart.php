@@ -42,7 +42,7 @@ if (isset($_GET["id"])) {
         $sqlUpdate = "UPDATE cart SET content = ? WHERE id_user = ?";
 
 
-        // Juste avant de transmettre le content mis à jour de notre cart en BDD 
+            // Juste avant de transmettre le content mis à jour de notre cart en BDD 
         // On l'enregistre en parallèle en Session
         $_SESSION["cart"] = $content;
 

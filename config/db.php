@@ -2,7 +2,6 @@
 
 
 // Fichier de connexion de la BDD 
-
 include "dotenv.php";
 
 

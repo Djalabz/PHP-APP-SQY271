@@ -83,7 +83,6 @@ if (!empty($_GET)) {
 
                 $bool = $todo["check"];
 
-
                 $sql = "UPDATE todos SET checked = ? WHERE id = ?";
 
                 $stmt = $db->prepare($sql);
@@ -117,10 +116,8 @@ if (!empty($_GET)) {
             <?php if (!empty($_GET) && isset($_GET["id"]) && ($_GET["id"] == $todo["id"]) && $_GET["edit"]) : ?> 
 
                 <form action="todo.php?id=<?= $todo["id"] ?>&edit=done" method="POST">
-
                     <input type="text" name="todo-change" placeholder="<?= $todo["content"] ?>">
                     <input type="submit" name="submit" value="Changer"/>
-
                 </form>
 
             <?php else : ?>
