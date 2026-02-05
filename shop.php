@@ -4,18 +4,18 @@ include "partials/header.php";
 include "partials/check-session.php";
 include "config/cURL.php";
 
-// Todo sur cette page : 
+// Challenge notes et commentairess :
 
-// 1 - Ajouter pour chaque article un bouton Ajouter au panier 
-// 2 - Sur la page article limiter la description
-// 3 - Sur la page de panier prendre en compte les quantités
-// cad que si on a ajouté 2 fois le meme item au panier 
-// -> Il ne s'affiche qu'une fois seule la quantité change  
+// - Permettre au User de noter chaque article : la note pouvant aller de 0 à 5 (vous pouvez utiliser des étoiles)
+// - Créer une table en BDD qui va contenir les notes, une entrée dans la table = une note d'un user 
+// - Dans cette table note il faudra que chaque note enregistrée puisse etre reliée à un article et à un utilisateur 
+// - Quand un user met une note celle-ci est enregistrée en BDD et on actualise l'affichage de la note du produit : 
+// -> Cette notre doit etre une moyenne de toutes les note attribuées au produit
 
-// !! : si vous utilisez curl placez le contenu de la requete en curl 
-// dans un fichier séparé (cURL.php) qui sera dans le dossier config
-// On pourra faire comme avec $db et importer la réponse du cURL dans les 
-// fichiers adequats 
+// PS1 : Une seule note possible par article pour chaque user 
+// PS2 : Les notes doivent apparaitre dans la page shop et la page produit
+
+// BONUS : Faire un système de commentaire ou on peut commenter un produit sur la page produit seulement
 
 // On recup tous les produits en utilisant notre fonction de connexion vers l'API
 $products = connectToAPI("https://fakestoreapi.com/products"); 

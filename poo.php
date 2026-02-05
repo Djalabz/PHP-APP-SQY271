@@ -7,7 +7,6 @@
 // Les classes permettenty de générer des objets 
 
 // Le nom des classes doit etre en PascalCase (à ne pas confondre avec le camelCase)
-
 class User {
     // Attributs ou propriétés cad des variables associées au User
     // Ici le private est la portée de notre prorpriété. Ces propriétés peuvent etre : 
@@ -15,7 +14,6 @@ class User {
     public $name = "Patrick";
     public $age = 23;
     public $email;
-
 
     // Méthodes qui sont en fait des fonctions liées au User
     public function sayHello() {
@@ -26,7 +24,6 @@ class User {
 class SuperUser extends User {
     public $avatar;
 }
-
 
 // Pour générer un objet on doit "instancier" notre classe
 // Ici je génère un objet "$patrick" à partir de la classe User avec le mot clé new

@@ -4,7 +4,6 @@
 // Fichier de connexion de la BDD 
 include "dotenv.php";
 
-
 try {
     // On tente de se connecter à la BDD avec PDO 
     // Le data source name, une string qui contient certaines infos de connexion 
