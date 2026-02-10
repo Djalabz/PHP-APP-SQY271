@@ -93,13 +93,27 @@ if (isset($_POST["submit"])) {
 }
 
 // AFFICHAGE DES DIFFERENTS COMMENTAIRES 
-$sqlComment = "SELECT content, id_user, id_product, comments.timestamp, username, avatar FROM comments INNER JOIN users ON comments.id_user = users.id WHERE id_product = ?";
+$sqlComment = "SELECT comments.id, content, id_user, id_product, comments.timestamp_comment, username, avatar FROM comments INNER JOIN users ON comments.id_user = users.id WHERE id_product = ?";
 $stmt = $db->prepare($sqlComment);
 $stmt->execute([$product["id"]]);
 $comments = $stmt->fetchAll();
 // echo("<pre>");
 // print_r($comments);
 // echo("</pre>");
+
+// SUPPRESSION d'UN COMMENTAIRE 
+if (isset($_GET["delete"])) {
+    $sql = "DELETE FROM comments WHERE id = ?";
+
+    $stmt = $db->prepare($sql);
+    $stmt->execute([$_GET["delete"]]);
+
+    header("Location: shop-item.php?id=" . $product["id"]);
+    exit();
+}
+
+
+
 
 ?>
 
@@ -186,18 +200,24 @@ $comments = $stmt->fetchAll();
 
         <?php foreach($comments as $comment) : ?>
 
-        <div class="mt-6 relative grid grid-cols-1 gap-4 p-4 mb-8 border rounded-lg bg-white shadow-lg">
-        <div class="relative flex gap-4">
-        <img src="<?= $comment["avatar"]?>" class="relative rounded-lg -top-8 -mb-4 bg-white border h-20 w-20" alt="" loading="lazy">
-        <div class="flex flex-col w-full">
-        <div class="flex flex-row justify-between">
-        <p class="relative text-xl whitespace-nowrap truncate overflow-hidden"><?= $comment["username"] ?></p>
-        <a class="text-gray-500 text-xl" href="#"><i class="fa-solid fa-trash"></i></a>
-        </div>
-        <p class="text-gray-400 text-sm"><?= $comment["timestamp"] ?></p>
-        </div>
-        </div>
-        <p class="-mt-4 text-gray-500"><?= $comment["content"] ?></p>
+        <div class="mt-6 relative grid grid-cols-1 gap-4 p-4 mb-8 border rounded-lg bg-white shadow-lg relative">
+            <!-- Liens d'edit et de suppression -->
+            <div class="comment-links flex absolute right-0 mt-2">
+                <a><img class="w-6 mr-2 cursor-pointer" src="assets/icons/edit.svg"></a>
+                <a href="shop-item.php?id=<?= $product["id"] ?>&delete=<?= $comment["id"] ?>"><img class="w-6 mr-2 cursor-pointer" src="assets/icons/close-cross.svg"></a>
+            </div>
+
+            <div class="relative flex gap-4 w-fit">
+                <img src="<?= $comment["avatar"]?>" class="relative rounded-lg -top-8 -mb-4 bg-white border h-20 w-20" alt="" loading="lazy">
+                <div class="flex flex-col w-fit">
+                    <div class="flex flex-row justify-between">
+                        <p class="relative text-xl whitespace-nowrap truncate overflow-hidden"><?= $comment["username"] ?></p>
+                        <a class="text-gray-500 text-xl" href="#"><i class="fa-solid fa-trash"></i></a>
+                    </div>
+                    <p class="text-gray-400 text-sm"><?= $comment["timestamp_comment"] ?></p>
+                </div>
+            </div>
+            <p class="-mt-4 text-gray-500"><?= $comment["content"] ?></p>
         </div>
 
         <?php endforeach ?>

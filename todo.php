@@ -9,7 +9,7 @@ include "config/db.php";
 // On doit également pouvoir supprimer la todo lorsque l'on clique sur le bouton de suppression
 // En profiter pour récupérer des composants tailwind qui rende notre todo plus jolie 
 // Créér un lien dans le menu qui mène vers nos différents exos / projets en PHP (et qui inclut cette todo) 
-
+ 
 // 1 - Ajouter les boutons en question dans le HTML (modifier et supprimer) pour chaque todo
 // 2 - Associer des liens <a> à ces boutons (et on pourra mener vers une URL spécifique pour
 // la modification ou la suppression)
