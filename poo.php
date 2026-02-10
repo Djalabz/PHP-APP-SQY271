@@ -13,13 +13,24 @@ class User {
     // public, protected ou private
     public $name = "Patrick";
     public $age = 23;
-    public $email;
+    private $email;
 
     // Méthodes qui sont en fait des fonctions liées au User
     public function sayHello() {
         return "Bonjour $this->name tu as $this->age ans";
     }
+
+    // Fonction de type Getter 
+    public function getEmail() {
+        return $this->email;
+    }
+
+    // fonction de type setter 
+    public function setEmail($email) {
+        $this->email = $email;
+    }
 }
+
 
 class SuperUser extends User {
     public $avatar;
@@ -39,9 +50,12 @@ class Voiture {
     // Attributs publics
     private string $brand;
     private string $color;
-    private int $power;
+    private int $power; 
     private int $speed = 0; 
+    public static $engine = "V8";
 
+
+    // Fonction de type Constructor
     public function __construct($marque, $color) {
         $this->brand = $marque;
         $this->color = $color;
@@ -73,6 +87,11 @@ class Voiture {
     public function setBrand($brand) {
         $this->brand = $brand;
     } 
+
+    // exemple de méthode statique -> On peut appeller ce genre de méthode sans avoir à instancier notre classe
+    public static function sayBye() {
+        return "Au revoir !";
+    }
 }
 
 // Instanciation de la classe -> création d'objets.
@@ -82,3 +101,8 @@ $renault = new Voiture("renault", "verte");
 
 // echo $jaguar->brand; // Fatal error -> car $brand est un attribut privé
 echo $jaguar->getBrand(); // Là on est bon !
+
+// Ici on appelle notre méthode statique sans avoir besoin d'instancier la classe 
+// au préalable
+Voiture::sayBye();
+

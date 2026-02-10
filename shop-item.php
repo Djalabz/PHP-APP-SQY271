@@ -87,7 +87,6 @@ if (isset($_POST["submit"])) {
         exit();
 
    } else {
-
         $error = "Veuillez écrire un commentaire ...";
    }
 }
@@ -111,8 +110,6 @@ if (isset($_GET["delete"])) {
     header("Location: shop-item.php?id=" . $product["id"]);
     exit();
 }
-
-
 
 
 ?>
