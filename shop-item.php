@@ -59,6 +59,18 @@ $stmt->execute([$product["id"]]);
 $avg = $stmt->fetch();
 
 
+//// SYSTEME DE COMMENTAIRE ////
+
+// Etape en BDD -> Créer une table pour les commenatires (id, contenu, id_auteur, timestamp)
+
+// 1 - Créer l'input de texte pour le commentaire et un bouton de confirmation (en html)
+// 2 - Coder la logique PHP ensuite : 
+//      - vérifier les données (empecher les caractères de type html)
+//      - Enregistrer les commentaire en BDD via la connexion PDO ($db)
+// 4 - Une fois le commentaiore enregistré en BDD on redirige vers une version actualisée de la page  
+// 5 - L'idée étant que lorsque l'on arrive sur la page les comments se chargent automatiquement
+
+
 ?>
 
 
