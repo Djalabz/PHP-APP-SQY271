@@ -1,10 +1,11 @@
 <?php
 
 // Fichier de connexion de la BDD 
-include "../dotenv.php";
+
+// On inclut dotenv qui contient les variables d'environnement
+include "dotenv.php";
 
 class DB {
-    
     // Le data source name, une string qui contient certaines infos de connexion 
     private static $dsn = "mysql:dbname=app-sqy271;host=localhost";
     // On va préciser les options pour PDO, ici récupérer comme réponse de la BDD sous forme de tableau associatif
@@ -13,7 +14,7 @@ class DB {
     public static function connectDB($dbuser, $dbpassword) {    
         try {
              // On affiche un message de confirmation si succès
-            echo "La connexion à la BDD a réussie";
+            // echo "La connexion à la BDD a réussie";
 
             // On tente de se connecter à la BDD avec PDO 
             // On vient finalement se connecter à la BDD 
@@ -26,4 +27,6 @@ class DB {
     } 
 }
 
+// On appelle la méthode statique connectDB qui nous retourne 
+// l'objet de la connexion 
 $db = DB::connectDB($dbuser, $dbpassword);
