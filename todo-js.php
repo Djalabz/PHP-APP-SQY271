@@ -4,6 +4,10 @@ include "partials/header.php";
 
 ?>
 
+<!-- Script JS pour le fonctionnement de la todo  -->
+<script type="module" src="scripts/todo.js" defer></script>
+
+
 <h1>Mon app de Todo en JS</h1>
 
 <div class="w-80 mt-24 mx-auto">

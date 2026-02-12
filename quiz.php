@@ -5,6 +5,8 @@ include "partials/check-session.php";
 
 ?>
 
+<script type="module" src="scripts/quiz.js" defer></script>
+
 <h1>Page de quiz</h1>
 
 <!-- En alliant JS et HTML / PHP on veut coder un quiz dynamique qui 

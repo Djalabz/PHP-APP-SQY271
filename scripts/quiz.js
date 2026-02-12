@@ -20,3 +20,8 @@
 // -> Afficher pour chaque tour / question le score 
 
 // A la toute fin le score final et un bouton "recommencer"
+
+import countries from '../pays-capitales.json' with { type: 'json' };
+
+// Je recup mon tableau avec tous les pays dans la variable countries 
+console.log(countries)
