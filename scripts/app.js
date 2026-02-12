@@ -42,7 +42,9 @@ window.addEventListener("DOMContentLoaded", () => {
 // On gère la soumission d'une todo en appellant displayTodo 
 todoSubmit.addEventListener("click", () => {
     if (todoInput.value != "") {
-        displayTodo(UUID.generate(), todoInput.value, false)
+        let todosArray = displayTodo(UUID.generate(), todoInput.value, false)
+        // Enfin onenregistre en Local Storage la version mise à jour du tableau
+        localStorage.setItem("todos", JSON.stringify(todosArray)) 
     }    
 })
 
@@ -123,9 +125,7 @@ function displayTodo(id, content, check) {
     // On ajoute à notre tableau de todos l'objet contenant les infos de notrre todo actuelle
     todosArray.push(todoObject)
 
-    // Enfin onenregistre en Local Storage la version mise à jour du tableau
-    localStorage.setItem("todos", JSON.stringify(todosArray)) 
+    return todosArray
 }
 
 
-  
