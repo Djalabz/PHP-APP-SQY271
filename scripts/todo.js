@@ -48,7 +48,7 @@ todoSubmit.addEventListener("click", () => {
     }    
 })
 
-// FONCTION D'AFFICHAGE DE TODO ET D'ENREGISTREMENT EN LS
+// FONCTION D'AFFICHAGE DE TODO ET DE MISE A JOUR DU TABLEAU DES TODOS 
 function displayTodo(id, content, check) {
     // Je créee un élément HTML avec pour balise div
     let todoDiv = document.createElement("div")
@@ -116,6 +116,7 @@ function displayTodo(id, content, check) {
     // Je viens "append" cad injecter ma todo fraichement créee dans ma liste de todos 
     todosList.append(todoDiv)
 
+    // Création de l'objet todo qui contient mes paires de clé->valeur pour chaque todo 
     let todoObject = {
         id : id ,
         content: todoDiv.childNodes[0].childNodes[1].textContent,

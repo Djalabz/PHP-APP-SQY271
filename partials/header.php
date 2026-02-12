@@ -18,7 +18,8 @@ session_start();
     <!-- Import de animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <!-- Import des scripts JS -->
-    <script type="module" src="scripts/app.js" defer></script>
+    <script type="module" src="scripts/comments.js" defer></script>
+    <script type="module" src="scripts/todo.js" defer></script>
 </head>
 
 <body>
