@@ -201,7 +201,7 @@ if (isset($_GET["delete"])) {
             <!-- Liens d'edit et de suppression -->
             <div class="comment-links flex absolute right-0 mt-2">
                 <a><img class="w-6 mr-2 cursor-pointer" src="assets/icons/edit.svg"></a>
-                <a href="shop-item.php?id=<?= $product["id"] ?>&delete=<?= $comment["id"] ?>"><img class="w-6 mr-2 cursor-pointer" src="assets/icons/close-cross.svg"></a>
+                <a href="shop-item.php?id=<?= $product["id"] ?>&delete=<?= $comment["id"] ?>"><img class="cross-btn w-6 mr-2 cursor-pointer" src="assets/icons/close-cross.svg"></a>
             </div>
 
             <div class="relative flex gap-4 w-fit">
