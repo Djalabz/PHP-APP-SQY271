@@ -14,6 +14,10 @@ crossBtn.forEach(btn => {
 
 // TODO APP 
 
+// On importe UUID afin de générer des id de type hash pour chaque todo
+import { UUID } from "https://unpkg.com/uuidjs@^5";
+// const uuidv4 = UUID.generate();
+
 // Récupérer contenu de l'input lors du click
 // vérifier que ce ne soit pas vide 
 // l'afficher dans la zone des todos
@@ -30,7 +34,7 @@ let todosArray = JSON.parse(localStorage.getItem("todos")) || []
 window.addEventListener("DOMContentLoaded", () => {
     if (todosArray.length) {
         todosArray.forEach(todo => {
-            displayTodo(todo.content, todo.check)
+            displayTodo(todo.id, todo.content, todo.check)
         })
     }
 })
@@ -38,12 +42,12 @@ window.addEventListener("DOMContentLoaded", () => {
 // On gère la soumission d'une todo en appellant displayTodo 
 todoSubmit.addEventListener("click", () => {
     if (todoInput.value != "") {
-        displayTodo(todoInput.value, false)
+        displayTodo(UUID.generate(), todoInput.value, false)
     }    
 })
 
 // FONCTION D'AFFICHAGE DE TODO ET D'ENREGISTREMENT EN LS
-function displayTodo(content, check) {
+function displayTodo(id, content, check) {
     // Je créee un élément HTML avec pour balise div
     let todoDiv = document.createElement("div")
     todoDiv.classList.add("relative")
@@ -83,6 +87,18 @@ function displayTodo(content, check) {
     closeBtn.addEventListener("click", () => {
         // Avec remove() on supprime la todo désirée
         todoDiv.remove()
+
+        // On recup le tabeleau des todos depuis le LS 
+        let array = JSON.parse(localStorage.getItem("todos"))
+
+        // On filtre la todo à supprimer en utilisant l'id 
+        let filtered = array.filter(todo => todo.id !== id)
+
+        // On supprime l'ancien tableau du LS 
+        localStorage.removeItem("todos")
+
+        // On réenregistre la version filtrée du tableau en LS 
+        localStorage.setItem("todos", JSON.stringify(filtered))
     })
 
     // Je regroupe mes boutons dans une div parent 
@@ -99,6 +115,7 @@ function displayTodo(content, check) {
     todosList.append(todoDiv)
 
     let todoObject = {
+        id : id ,
         content: todoDiv.childNodes[0].childNodes[1].textContent,
         check: checkBtn.checked || check
     }
@@ -111,10 +128,4 @@ function displayTodo(content, check) {
 }
 
 
-// J'ajoute au LS une paire de clé (nom) et valeur (jeanjean)
-localStorage.setItem("nom", "jeanjean")
-localStorage.getItem("nom") // Je récupère la valeur associée à nom depuis le LS
-
-
-// FAIRE FONCTIONNER LA TODO AVEC LE Local Storage
   
