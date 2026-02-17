@@ -21,6 +21,7 @@
 
 // A la toute fin le score final et un bouton "recommencer"
 
+// J'importe le tableau de type JSON en le rendant exploitable en JS 
 import countries from '../pays-capitales.json' with { type: 'json' };
 
 // Je recup mon tableau avec tous les pays dans la variable countries 
