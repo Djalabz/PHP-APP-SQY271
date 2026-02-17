@@ -33,7 +33,7 @@ Aussi un bouton recommencer doit apparaitre et recharger le jeu lorsque l'on cli
     <!-- On nous propose de valider pour sélectionner une option 
     Puis dans un deuxieme temps le bouton affichera suivant pour 
     passer à la question suivante  -->
-    <button>Valider</button>
+    <button class="quiz-submit">Valider</button>
 
 </div>
 
