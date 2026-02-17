@@ -16,6 +16,7 @@
 
 // Ajouter les écouteurs d'événement pour les touches directionnelles 
 // Dans ce listener vous pourrez avoir des conditions : selon la touche appuyée le carré fait tel ou tel mouvement 
-// Afin que le carré bouge on pourra utiliser du CSS (utiliser transition pour le saut et jouer sur left et right en CSS pour les mouvements)
+// Afin que le carré bouge on pourra utiliser du CSS (utiliser transition pour le saut et jouer sur left et right en 
+// CSS pour les mouvements)
 
-// Pour le bonus  
+// Pour le bonus il faudra recup la position du carré et si elle correspond à celle du projectile -> Game Over 
