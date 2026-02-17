@@ -28,18 +28,20 @@ import countries from '../pays-capitales.json' with { type: 'json' };
 console.log(countries)
 
 // Récupération des élémnets de ma page HTML afin de les manipuler 
-const container = document.querySelector(".quiz")
-const question = document.querySelector(".quiz-question")
-const score = document.querySelector(".quiz-score")
-const choices = document.querySelector(".quiz-choices")
-const questionNumber = document.querySelector(".quiz-number")
-const comment = document.querySelector(".quiz-comment")
-const submit = document.querySelector(".quiz-submit")
+let container = document.querySelector(".quiz")
+let question = document.querySelector(".quiz-question")
+let score = document.querySelector(".quiz-score")
+let choices = document.querySelector(".quiz-choices")
+let questionNumber = document.querySelector(".quiz-number")
+let comment = document.querySelector(".quiz-comment")
+let submit = document.querySelector(".quiz-submit")
 
+// On attend que la page charge tous ses éléments avant de lancer le jeu
 window.addEventListener("DOMContentLoaded", () => {
     initQuiz()
 })
 
+// Fonction qui génère l'objet contenant le payx les options et autres infos nécessaires 
 function fetchRandomCountry() {
     let index = Math.floor(Math.random() * countries.length)
     let currentCountry = countries[index]
@@ -77,31 +79,62 @@ function fetchRandomCountry() {
     
 }
 
+// Fonction de jeu 
 function initQuiz() {
     //// On affiche les éléments du jeu 
     // Génerer une première question aléatoire depuis notre fichier json
+    let points = 0;
 
     // randomCountry est l'objet qui contient toutes les infos dont nous avons besoin
-    let randomCountry = fetchRandomCountry()
+    let countryObject = fetchRandomCountry()
 
-    console.log(randomCountry)
+    console.log(countryObject)
+
+    // Afficher score, question et réponses 
+    question.textContent = countryObject.current.pays
+    
 
     // Générer aussi les réponses possibles (4 au total)
+    countryObject.options.forEach(option => {
+        let quizBtn = document.createElement("button")
+        quizBtn.textContent = option
 
-    // Pour chacun des boutons générés on devra les "écouter"
-    // Quand on clique sur le bouton que se passe-t-il ?
-    // -> On vient verifier si la réponse est la bonne 
+        // Pour chacun des boutons générés on devra les "écouter"
+        quizBtn.addEventListener("click", () => {
+            // On enlève la classe selected à l'ensemble des buttons ...
+            choices.querySelectorAll("button").forEach(choice => {
+                choice.classList.remove("selected", "bg-blue-600")
+            }) 
+            // ... avant de la rajouter au dernier bouton cliqué
+            quizBtn.classList.add("selected", "bg-blue-600")
+            
+        })
 
-    // Si la réponse est la bonne => 
-    // On affiche un message de succès (en vert)
-    // + le bouton confirmer le choix qui deviendrait question suivante
-    // + On ajoute +1 au score 
-    
-    // Si la réponse est la mauvaise =>
-    // Message d'éhec (en rouge)
-    // Meme chose pour le bouton 
+        choices.appendChild(quizBtn)
+    }) 
 
+    // Ecouter le bouton de submit -> Quand on clique dessus on vérifie la répobnse fournie
+    submit.addEventListener("click", () => {
+        submit.textContent = "Question suivante"
 
+        let selectedOption = document.querySelector(".selected")
+
+        // Vérification de la réponse 
+        if (selectedOption.textContent == countryObject.current.capitale) {
+            comment.textContent = "Bravo c'est la bonne"
+            selectedOption.classList.add("bg-green-600")
+
+            score += 1
+
+        } else {
+            comment.textContent = "Bouh c'est mauvais"
+            selectedOption.classList.add("bg-red-500")
+        }
+
+        submit.addEventListener("click", () => {
+            console.log("go to question suivante")
+        })
+    })
 
 }
 

@@ -20,8 +20,8 @@ Aussi un bouton recommencer doit apparaitre et recharger le jeu lorsque l'on cli
 
 <div class="quiz">
 
-    <h3 class="quiz-number">Question :</h3>
-    <h3 class="quiz-score">Score : </h3>
+    <h3 class="quiz-number"></h3>
+    <h3 class="quiz-score"></h3>
 
     <h2 class="quiz-question"></h2>
 
