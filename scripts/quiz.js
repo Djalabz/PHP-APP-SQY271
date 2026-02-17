@@ -35,11 +35,14 @@ let choices = document.querySelector(".quiz-choices")
 let questionNumber = document.querySelector(".quiz-number")
 let comment = document.querySelector(".quiz-comment")
 let submit = document.querySelector(".quiz-submit")
+let next = document.querySelector(".quiz-next")
 
 // On attend que la page charge tous ses éléments avant de lancer le jeu
 window.addEventListener("DOMContentLoaded", () => {
     initQuiz()
 })
+
+console.log(typeof comment.textContent)
 
 // Fonction qui génère l'objet contenant le payx les options et autres infos nécessaires 
 function fetchRandomCountry() {
@@ -75,22 +78,53 @@ function fetchRandomCountry() {
         options: answers
     }
 
-    return countryObject  
-    
+    return countryObject      
 }
+
+
+// TODO : 
+
+// - Pouvoir enchainer les questions et stopper à la 20eme ou on nous propose de recommencer le jeu...
+// Une boucle est tout indiquée (for ? while ?)
+// - Pkoi pas améliorer avec du CSS / Tailwind 
+
 
 // Fonction de jeu 
 function initQuiz() {
     //// On affiche les éléments du jeu 
     // Génerer une première question aléatoire depuis notre fichier json
     let points = 0;
+    let pastCountries = []
+    let rounds = 1
 
-    // randomCountry est l'objet qui contient toutes les infos dont nous avons besoin
+    score.textContent = points
+    questionNumber.textContent = rounds
+
+    // for (let i = 1; i <= 20; i++) {
+    //     let country = createQuestion()
+    //     pastCountries.push(country.current.pays)
+    //     rounds += 1
+    // }
+    createQuestion(points, rounds, pastCountries)
+}
+
+
+function createQuestion(points, rounds, pastCountries) {
+    // On réinitialise les infos liées à la question
+    choices.innerHTML = ""
+    comment.textContent = ""
+    let submitClone = submit.cloneNode(true)
+
     let countryObject = fetchRandomCountry()
 
-    console.log(countryObject)
+    while (pastCountries.includes(countryObject.current.pays)) {
+        countryObject = fetchRandomCountry()
+    }
 
-    // Afficher score, question et réponses 
+    // On ajoute le pays en cours au tableau de l'historique des pays 
+    pastCountries.push(countryObject.current.pays)
+
+    // On affiche la première question aka le premier pays  
     question.textContent = countryObject.current.pays
     
 
@@ -99,7 +133,7 @@ function initQuiz() {
         let quizBtn = document.createElement("button")
         quizBtn.textContent = option
 
-        // Pour chacun des boutons générés on devra les "écouter"
+        // Pour chacun des boutons générés on devra les "écouter"+
         quizBtn.addEventListener("click", () => {
             // On enlève la classe selected à l'ensemble des buttons ...
             choices.querySelectorAll("button").forEach(choice => {
@@ -107,16 +141,13 @@ function initQuiz() {
             }) 
             // ... avant de la rajouter au dernier bouton cliqué
             quizBtn.classList.add("selected", "bg-blue-600")
-            
         })
 
         choices.appendChild(quizBtn)
     }) 
 
     // Ecouter le bouton de submit -> Quand on clique dessus on vérifie la répobnse fournie
-    submit.addEventListener("click", () => {
-        submit.textContent = "Question suivante"
-
+    submitClone.addEventListener("click", () => {
         let selectedOption = document.querySelector(".selected")
 
         // Vérification de la réponse 
@@ -124,20 +155,35 @@ function initQuiz() {
             comment.textContent = "Bravo c'est la bonne"
             selectedOption.classList.add("bg-green-600")
 
-            score += 1
+            points += 1
+            score.textContent = points
 
         } else {
             comment.textContent = "Bouh c'est mauvais"
             selectedOption.classList.add("bg-red-500")
         }
 
-        submit.addEventListener("click", () => {
-            console.log("go to question suivante")
-        })
+        
+
+        // Passage à la question suivante 
+        if (comment.textContent != null) {
+            next.addEventListener("click", () => {
+                if (rounds < 20) {
+                    rounds += 1
+                    createQuestion(points, rounds, pastCountries)
+                } else {
+                    container.innerHTML = "fin"
+    
+                }
+            })
+        }
     })
 
-}
+    submit.replaceWith(submitClone)
 
+    return countryObject
+
+}
 
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -147,4 +193,4 @@ function shuffle(array) {
       [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
-  }
+}
